@@ -1,12 +1,18 @@
 package main;
 
 import DAO.Factory;
+import entity.Address;
+import entity.Users;
+import persistence.HibernateUtil;
+
+import java.util.Date;
 
 public class Main {
     public static void main(String[] args) throws Exception {
 
-
-        System.out.println(Factory.getInstance().getUserDAO().getUsersById(1).getFirstname());
+        Users u = new Users("Vanya","Ivanov","vanka-vstanka","222","vanya@mail.ru","2015-05-05", new Date(),1);
+        Address a = new Address(90210,"Belarus","Mohilew","Zadneprovie","Grishina");
+        Factory.getInstance().getAddressDAO().updateZip(1,90220);
 
         /*ServletContextHandler contextHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
         //contextHandler.addServlet(new ServletHolder(new GetScheduleServlet(sheetsService)), "/schedule");
@@ -23,5 +29,6 @@ public class Main {
 
         server.join();
         server.start();*/
+        HibernateUtil.getSessionFactory().close();
     }
 }

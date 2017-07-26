@@ -23,9 +23,10 @@ public class Users {
     private Date createdTimestamp;
     private Date lastUpdatedTimeStamp;
     private Integer isActive;
+    private String role;
 
     public Users(String firstname, String lastname,String username, String password, String email,
-          String birthday, Date createdTimestamp, Integer isActive) throws ParseException {
+          String birthday, Date createdTimestamp, Integer isActive, String role) throws ParseException {
         this.firstname = firstname;
         this.lastname = lastname;
         this.username = username;
@@ -35,6 +36,7 @@ public class Users {
         this.createdTimestamp = createdTimestamp;
         this.lastUpdatedTimeStamp = new Date();
         this.isActive = isActive;
+        this.role = role;
     }
 
     public Users() {
@@ -140,6 +142,13 @@ public class Users {
         this.isActive = isActive;
     }
 
+    @Basic
+    @Column(name = "role", nullable = true)
+    public String getRole(){return role;}
+
+    public void setRole(String role){this.role = role;}
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -159,6 +168,7 @@ public class Users {
         if (lastUpdatedTimeStamp != null ? !lastUpdatedTimeStamp.equals(users.lastUpdatedTimeStamp) : users.lastUpdatedTimeStamp != null)
             return false;
         if (isActive != null ? !isActive.equals(users.isActive) : users.isActive != null) return false;
+        if (role != null ? !role.equals(users.role) : users.role != null) return false;
 
         return true;
     }
@@ -175,6 +185,7 @@ public class Users {
         result = 31 * result + (createdTimestamp != null ? createdTimestamp.hashCode() : 0);
         result = 31 * result + (lastUpdatedTimeStamp != null ? lastUpdatedTimeStamp.hashCode() : 0);
         result = 31 * result + (isActive != null ? isActive.hashCode() : 0);
+        result = 31 * result + (role != null ? role.hashCode() : 0);
         return result;
     }
 }
