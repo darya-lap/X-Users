@@ -42,7 +42,7 @@ public class UserDAO implements UserDAOInterface{
         Users user = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
-            user = (Users) session.load(Users.class, user_id);
+            user = (Users) session.get(Users.class, user_id);
         } catch (Exception e) {
             System.out.println("Ошибка 'findById'");
         } finally {
