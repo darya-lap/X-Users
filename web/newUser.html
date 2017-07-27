@@ -19,6 +19,8 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script type="text/javascript" src="js/redirect.js"></script>
+    <script type="text/javascript" src="js/isSuccessAdd.js"></script>
 
 </head>
 <body>
@@ -27,7 +29,10 @@
         <div class="col-md-3">
             <p>X-Users</p>
         </div>
-        <div class="col-md-8"></div>
+        <div class="col-md-6 text-center">
+            <button class = "btn btn-primary" onclick="toUsersList()">To User's list</button>
+        </div>
+        <div class = "col-md-2"></div>
         <div class = "col-md-1">
             <button class = "btn btn-primary" onclick="logout()">Log Out</button>
         </div>
@@ -39,7 +44,8 @@
     </div>
     <div class = "row text-center">
         <div class="col-md-8 col-md-offset-2">
-            <form action="/newUser" method="get" id = "userForm" style = "border: double; margin-top: 10px; padding-top: 30px; padding-bottom: 30px;">
+            <label style = "color: #ac2925" id="isSuccessAdd"></label>
+            <form action="/newUser" method="get" id = "userForm" style = "border: double;padding-top: 10px; padding-bottom: 30px;">
                 <label for="username">Username: </label>
                 <input type = "text"  id = "username" name = "username"><br>
 

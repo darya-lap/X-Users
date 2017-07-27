@@ -32,7 +32,7 @@ public class Users {
         this.password = password;
         this.email = email;
 
-        DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date result =  df.parse(birthday);
 
         System.out.println(result);

@@ -25,6 +25,9 @@ public class AuthServlet extends HttpServlet {
             if (user != null){
                 String db_password = user.getPassword();
                 if (password.equals(db_password)){
+                    session.setAttribute("user_name",user.getFirstname());
+                    session.setAttribute("user_surname", user.getLastname());
+                    session.setAttribute("user_role", user.getRole());
                     if (user.getRole().equals("admin")) {
                         resp.sendRedirect("/admin.html?role=admin&name=" + user.getFirstname() + "&surname=" + user.getLastname());
                     }

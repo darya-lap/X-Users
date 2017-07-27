@@ -11,3 +11,10 @@ function addNewUser(){
     href = href[0];
     window.location.href = href + "/newUser.html";
 }
+
+function toUsersList() {
+    var href = window.location.href;
+    href = href.split('/');
+    href = href[0];
+    window.location.href = href + "/admin.html";
+}

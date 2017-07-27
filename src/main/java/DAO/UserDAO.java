@@ -21,9 +21,13 @@ public class UserDAO implements UserDAOInterface{
             session.beginTransaction();
             session.save(user);
             session.getTransaction().commit();
-            address.setId(user.getId());
-            Factory.getInstance().getAddressDAO().addAddress(address);
-            return true;
+            address.setId(getUsersByUsername(user.getUsername()).getId());
+            boolean isSuccess = Factory.getInstance().getAddressDAO().addAddress(address);
+            if (isSuccess) return true;
+            else {
+                deleteUserById(getUsersByUsername(user.getUsername()).getId());
+                return false;
+            }
         } catch (Exception e) {
             System.out.println("Ошибка при вставке");
             return false;
