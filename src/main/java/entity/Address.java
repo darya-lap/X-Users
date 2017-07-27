@@ -1,6 +1,9 @@
 package entity;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class Address {
@@ -10,6 +13,7 @@ public class Address {
     private String city;
     private String district;
     private String street;
+
 
     public Address(int zip, String country, String city, String district, String street){
         this.zip = zip;
@@ -23,8 +27,6 @@ public class Address {
     }
 
     @Id
-    @OneToOne(cascade = CascadeType.ALL)
-    //@PrimaryKeyJoinColumn
     @Column(name = "id", nullable = false)
     public int getId() {
         return id;

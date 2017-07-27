@@ -1,17 +1,15 @@
 package entity;
 
-import org.hibernate.annotations.Proxy;
-
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
-@Proxy(lazy = false)
 public class Users {
     private int id;
     private String firstname;
@@ -25,17 +23,29 @@ public class Users {
     private Integer isActive;
     private String role;
 
-    public Users(String firstname, String lastname,String username, String password, String email,
-          String birthday, Date createdTimestamp, Integer isActive, String role) throws ParseException {
+
+    public Users(String firstname, String lastname, String username, String password,
+                 String email, String birthday, String isActive, String role) throws ParseException {
         this.firstname = firstname;
         this.lastname = lastname;
         this.username = username;
         this.password = password;
         this.email = email;
-        this.birthday = new SimpleDateFormat("yyyy-MM-dd").parse(birthday);
-        this.createdTimestamp = createdTimestamp;
+
+        DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
+        Date result =  df.parse(birthday);
+
+        System.out.println(result);
+        this.birthday = result;
+        this.createdTimestamp = new Date();
         this.lastUpdatedTimeStamp = new Date();
-        this.isActive = isActive;
+        System.out.println(isActive);
+        if (isActive.equals("active")) {
+            this.isActive = 1;
+        }
+        else {
+            this.isActive = 0;
+        }
         this.role = role;
     }
 
@@ -143,11 +153,14 @@ public class Users {
     }
 
     @Basic
-    @Column(name = "role", nullable = true)
-    public String getRole(){return role;}
+    @Column(name = "role", nullable = true, length = 10)
+    public String getRole() {
+        return role;
+    }
 
-    public void setRole(String role){this.role = role;}
-
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     @Override
     public boolean equals(Object o) {

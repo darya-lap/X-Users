@@ -17,5 +17,11 @@
     cursor: pointer;
 }
 
-.addBtn{
+.tableInput{
+    width: 100%;
+}
+.col-md-1{
+    padding-left:1px;
+    padding-right:1px;
+    overflow-x: auto;
 }

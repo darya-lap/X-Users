@@ -12,15 +12,17 @@ import java.util.Date;
 public class AddressDAO implements AddressDAOInterface {
 
     @Override
-    public void addAddress(Address address) throws SQLException {
+    public boolean addAddress(Address address) throws SQLException {
         Session session = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             session.save(address);
             session.getTransaction().commit();
+            return true;
         } catch (Exception e) {
             System.out.println("Ошибка при вставке");
+            return false;
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
@@ -29,16 +31,18 @@ public class AddressDAO implements AddressDAOInterface {
     }
 
     @Override
-    public void update(int id, Address address) throws SQLException {
+    public boolean update(int id, Address address) throws SQLException {
         Session session = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             session.update(address);
             session.getTransaction().commit();
+            return true;
         }
         catch (Exception e){
             System.out.println("Update address error");
+            return false;
         }finally {
             if (session != null && session.isOpen()) {
                 session.close();
@@ -47,53 +51,67 @@ public class AddressDAO implements AddressDAOInterface {
     }
 
     @Override
-    public void updateZip(int id, int zip) throws SQLException {
+    public boolean updateZip(int id, int zip) throws SQLException {
+        boolean ret;
         Address address = getAddressById(id);
         Users user = Factory.getInstance().getUserDAO().getUsersById(id);
         address.setZip(zip);
         user.setLastUpdatedTimeStamp(new Date());
-        update(id, address);
-        Factory.getInstance().getUserDAO().update(id,user);
+        ret = Factory.getInstance().getUserDAO().update(id,user);
+        if (ret) {
+            return update(id, address);
+        }
+        else return ret;
     }
 
     @Override
-    public void updateCountry(int id, String country) throws SQLException {
+    public boolean updateCountry(int id, String country) throws SQLException {
+        boolean ret;
         Address address = getAddressById(id);
         Users user = Factory.getInstance().getUserDAO().getUsersById(id);
         address.setCountry(country);
         user.setLastUpdatedTimeStamp(new Date());
-        update(id, address);
-        Factory.getInstance().getUserDAO().update(id,user);
+        ret = Factory.getInstance().getUserDAO().update(id,user);
+        if (ret){
+            return update(id, address);
+        }
+        else return ret;
     }
 
     @Override
-    public void updateCity(int id, String city) throws SQLException {
+    public boolean updateCity(int id, String city) throws SQLException {
+        boolean ret;
         Address address = getAddressById(id);
         Users user = Factory.getInstance().getUserDAO().getUsersById(id);
         address.setCity(city);
         user.setLastUpdatedTimeStamp(new Date());
-        update(id, address);
-        Factory.getInstance().getUserDAO().update(id,user);
+        ret = Factory.getInstance().getUserDAO().update(id,user);
+        if (ret) return update(id, address);
+        else return ret;
     }
 
     @Override
-    public void updateDistrict(int id, String district) throws SQLException {
+    public boolean updateDistrict(int id, String district) throws SQLException {
+        boolean ret;
         Address address = getAddressById(id);
         Users user = Factory.getInstance().getUserDAO().getUsersById(id);
         address.setDistrict(district);
         user.setLastUpdatedTimeStamp(new Date());
-        update(id, address);
-        Factory.getInstance().getUserDAO().update(id,user);
+        ret = Factory.getInstance().getUserDAO().update(id,user);
+        if (ret) return update(id, address);
+        else return ret;
     }
 
     @Override
-    public void updateStreet(int id, String street) throws SQLException {
+    public boolean updateStreet(int id, String street) throws SQLException {
+        boolean ret;
         Address address = getAddressById(id);
         Users user = Factory.getInstance().getUserDAO().getUsersById(id);
         address.setStreet(street);
         user.setLastUpdatedTimeStamp(new Date());
-        update(id, address);
-        Factory.getInstance().getUserDAO().update(id,user);
+        ret = Factory.getInstance().getUserDAO().update(id,user);
+        if (ret) return update(id, address);
+        else return ret;
     }
 
     @Override
@@ -105,6 +123,7 @@ public class AddressDAO implements AddressDAOInterface {
             address = (Address) session.get(Address.class, id);
         } catch (Exception e) {
             System.out.println("Ошибка 'getAddressById'");
+            return null;
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
@@ -119,7 +138,7 @@ public class AddressDAO implements AddressDAOInterface {
     }
 
     @Override
-    public void deleteAddressById(int id) throws SQLException {
+    public boolean deleteAddressById(int id) throws SQLException {
         Session session = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
@@ -127,8 +146,10 @@ public class AddressDAO implements AddressDAOInterface {
             Address address = getAddressById(id);
             session.delete(address);
             session.getTransaction().commit();
+            return true;
         } catch (Exception e) {
             System.out.println("Ошибка при удалении");
+            return false;
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();

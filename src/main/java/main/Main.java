@@ -1,22 +1,22 @@
 package main;
 
-import DAO.Factory;
-import entity.Address;
-import entity.Users;
-import persistence.HibernateUtil;
-
-import java.util.Date;
+import org.eclipse.jetty.server.Handler;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.HandlerList;
+import org.eclipse.jetty.server.handler.ResourceHandler;
+import org.eclipse.jetty.servlet.ServletContextHandler;
+import org.eclipse.jetty.servlet.ServletHolder;
+import servlets.AddNewUser;
+import servlets.AuthServlet;
+import servlets.UpdateServlet;
 
 public class Main {
     public static void main(String[] args) throws Exception {
 
-        Users u = new Users("Vanya","Ivanov","vanka-vstanka","222","vanya@mail.ru","2015-05-05", new Date(),1);
-        Address a = new Address(90210,"Belarus","Mohilew","Zadneprovie","Grishina");
-        Factory.getInstance().getAddressDAO().updateZip(1,90220);
-
-        /*ServletContextHandler contextHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
-        //contextHandler.addServlet(new ServletHolder(new GetScheduleServlet(sheetsService)), "/schedule");
+        ServletContextHandler contextHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
         contextHandler.addServlet(new ServletHolder(new UpdateServlet()), "/update");
+        contextHandler.addServlet(new ServletHolder(new AuthServlet()), "/auth");
+        contextHandler.addServlet(new ServletHolder(new AddNewUser()), "/newUser");
 
         ResourceHandler resourceHandler = new ResourceHandler();
         resourceHandler.setResourceBase("web");
@@ -28,7 +28,9 @@ public class Main {
         server.setHandler(handlers);
 
         server.join();
-        server.start();*/
-        HibernateUtil.getSessionFactory().close();
+        server.start();
+
+        //HibernateUtil.getSessionFactory().close();
+
     }
 }
