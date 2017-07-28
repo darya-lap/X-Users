@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>X-Users</title>
+
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="js/contentEmail.js"></script>
+    <script type="text/javascript" src="js/redirect.js"></script>
+    <script type="text/javascript" src="js/buttons.js"></script>
+
+
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row header">
+        <div class="col-md-3">
+            <p style="font-size: 40px;">X-Users</p>
+        </div>
+        <div class="col-md-8"></div>
+        <div class = "col-md-1">
+            <button class = "btn btn-primary" onclick="toPage('logout')">Log Out</button>
+        </div>
+    </div>
+    <div class="row"></div>
+    <div class="row" id = "textHere" style="width: 100%;">
+        <div class="col-md-3 text-center">
+            <input type="button" class = "btn btn-primary cursor-pointer" value="Show all users" onclick="toPage('admin.html')" style="margin-top: 20px;">
+            <input id = "addNewBut" type="button" class = "btn btn-primary cursor-pointer" value="Add new User" onclick="toPage('newUser.html')" style="margin-top: 20px;">
+        </div>
+        <div class="col-md-3">
+            <label for="meeting">Searching by birthday : </label>
+            <form action="/searchByBirth" method="get">
+                <input id="meeting" class = "cursor-pointer" type="date" name="searchByBirth"/>
+                <button class="btn btn-default cursor-pointer">Search</button>
+            </form>
+        </div>
+        <div class="col-md-3">
+            <label for="emailSearch">Searching by e-mail : </label>
+            <form action="/searchByEmail" method="get">
+                <input id="emailSearch" class = "cursor-pointer" type = "text" name = "searchByEmail"/>
+                <button class="btn btn-default cursor-pointer">Search</button>
+            </form>
+        </div>
+        <div class = "col-md-3">
+            <label for="nameSearching">Search by name: </label>
+            <form action="/searchByName" method="get">
+                <input id="nameSearching" class = "cursor-pointer" type="text" name="searchByName"/>
+                <button class="btn btn-default cursor-pointer">Search</button>
+            </form>
+        </div>
+
+    </div>
+    <div class="row text-center" id = "shouldBeBlocked">
+        <div class="col-md-12  text-center">
+            <div class="row text-center" style="margin-top: 10px;">
+                <div class = "col-md-12" id = "usersTable">
+                    <div class = "row" id = "colored">
+                        <div class = "col-md-1">id</div>
+                        <div class = "col-md-1">Name</div>
+                        <div class = "col-md-1">Surname</div>
+                        <div class = "col-md-1">Birthday</div>
+                        <div class = "col-md-1">Username</div>
+                        <div class = "col-md-1">Password</div>
+                        <div class = "col-md-1">Created</div>
+                        <div class = "col-md-1">LastUpdating</div>
+                        <div class = "col-md-1">Status</div>
+                        <div class = "col-md-1">Role</div>
+                        <div class = "col-md-1">Actions</div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.js"></script>
+</body>
+</html>

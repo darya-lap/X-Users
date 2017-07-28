@@ -21,6 +21,7 @@
     <![endif]-->
     <script type="text/javascript" src="js/redirect.js"></script>
     <script type="text/javascript" src="js/isSuccessAdd.js"></script>
+    <script type="text/javascript" src="js/getCurUser.js"></script>
 
 </head>
 <body>
@@ -42,7 +43,8 @@
     <div class = "row text-center">
         <div class="col-md-8 col-md-offset-2" id = "formHere">
             <label style = "color: #ac2925" id="isSuccessAdd"></label>
-            <form action="/newUser" method="get" id = "userForm" style = "border: double;padding-top: 10px; padding-bottom: 30px;">
+            <form action="/editUser" method="get" id = "userForm" style = "border: double;padding-top: 10px; padding-bottom: 30px;">
+                <input type = "hidden"  id = "id" name = "id"><br>
 
                 <label for="username">Username: </label>
                 <input type = "text"  id = "username" name = "username"><br>
@@ -63,16 +65,16 @@
                 <input id="birthday" class = "cursor-pointer" type="date" name="birthday"/><br><br>
 
                 <label for="activity">Activity: </label>
-                    <select id="activity" name="activity" form="userForm"> <!--Supplement an id here instead of using 'name'-->
-                        <option value="active" selected>active</option>
-                        <option value="inactive">inactive</option>
-                    </select><br><br>
+                <select id="activity" name="activity" form="userForm"> <!--Supplement an id here instead of using 'name'-->
+                    <option value="active" id = "active">active</option>
+                    <option value="inactive" id = "inactive">inactive</option>
+                </select><br><br>
 
                 <label for="role">Role: </label>
-                    <select id="role" name="role" form="userForm"> <!--Supplement an id here instead of using 'name'-->
-                        <option value="user" selected>user</option>
-                        <option value="admin">admin</option>
-                    </select><br>
+                <select id="role" name="role" form="userForm"> <!--Supplement an id here instead of using 'name'-->
+                    <option value="user" id = "user">user</option>
+                    <option value="admin" id = "admin">admin</option>
+                </select><br>
 
                 <label for="zip">Zip: </label>
                 <input type = "text" id = "zip" name="zip"><br>
@@ -84,12 +86,12 @@
                 <input type = "text" id = "city" name="city"><br>
 
                 <label for="district">District: </label>
-                <input type = "text" id = "district"name="district"><br>
+                <input type = "text" id = "district" name="district"><br>
 
                 <label for="street">Street: </label>
                 <input type = "text" id = "street" name="street"><br>
 
-                <button class="btn btn-primary">Add new user</button>
+                <button class="btn btn-primary">Update user</button>
             </form>
         </div>
         <div class = "col-md-2"></div>

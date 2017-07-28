@@ -1,15 +1,28 @@
 document.addEventListener('DOMContentLoaded', function (e) {
+
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'http://localhost:8080/update', false);
+    xhr.open('GET', 'http://localhost:8080/searchByName', false);
     xhr.send();
     if (xhr.status === 200) {
         var json = JSON.parse(xhr.responseText);
     }
 
+    if (json == undefined) {
+        // document.getElementById('textHere').style.display = 'none';
+        document.getElementById('shouldBeBlocked').style.display = 'none';
+        var el = document.getElementsByClassName("container-fluid")[0];
+        var row9 = document.createElement("div");
+        row9.className = "row text-center";
+        var p99 = document.createElement("p");
+        p99.innerText = "There are no users with this name";
+        row9.appendChild(p99);
+        el.appendChild(row9);
+    }
     if (json[0] != undefined){
         document.getElementById('textHere').style.display = 'block';
         document.getElementById('shouldBeBlocked').style.display = 'block';
         var table = document.getElementById('usersTable');
+        var idCounter = 1;
         for (var i = 0; i < json.length; i++) {
             var id = parseInt(json[i]["id"]);
             var firstname = json[i]["firstname"];
@@ -32,24 +45,6 @@ document.addEventListener('DOMContentLoaded', function (e) {
             row.className = "row";
             var colmd12 = document.createElement("div");
             colmd12.className = "col-md-12";
-
-            var row3 = document.createElement("div");
-            row3.className = "row hi1";
-            var col33 = document.createElement("div");
-            col33.className = "col-md-6 col-md-offset-1";
-            col33.style = "text-align: left";
-            var p33 = document.createElement("p");
-            p33.innerText = "Address: " + zip + ", " + country + ", " + city + ", " + district + ", " + street;
-            col33.appendChild(p33);
-            var col32 = document.createElement("div");
-            col32.className = "col-md-3";
-            col32.style = "text-align: left";
-            var p32 = document.createElement("p");
-            p32.innerText = "E-mail: " + email;
-            col32.appendChild(p32);
-            row3.appendChild(col33);
-            row3.appendChild(col32);
-
             var row2 = document.createElement("div");
             row2.className = "row hi";
 
@@ -118,8 +113,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
             }
             else{
                 p10.innerText = "Inactive";
-                row2.style = "background: #BFBFBF";
-                 row3.style = "background: #BFBFBF";
+                row.style = "background: #BFBFBF;"
             }
             col10.appendChild(p10);
             row2.appendChild(col10);
@@ -138,6 +132,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
             div.style = "width: 100%; padding-top:13px";
             var but1 = document.createElement("button");
             but1.className = "btn btn-primary btn-xs activateButton";
+            but1.onclick = "";
             if (isActive === 1){
                 but1.innerText = "Deactivate";
             }
@@ -148,6 +143,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
             but1.disabled = "disabled";
             var but2 = document.createElement("button");
             but2.className = "btn btn-primary btn-xs editButton";
+            but2.onclick = "editUser()";
             but2.innerText = "Edit";
             but2.id = "edit|" + id;
             div.appendChild(but1);
@@ -155,20 +151,34 @@ document.addEventListener('DOMContentLoaded', function (e) {
             col12.appendChild(div);
             row2.appendChild(col12);
 
+            var row3 = document.createElement("div");
+            row3.className = "row hi1";
+            var col33 = document.createElement("div");
+            col33.className = "col-md-6 col-md-offset-1";
+            col33.style = "text-align: left";
+            var p33 = document.createElement("p");
+            p33.innerText = "Address: " + zip + ", " + country + ", " + city + ", " + district + ", " + street;
+            col33.appendChild(p33);
+            var col32 = document.createElement("div");
+            col32.className = "col-md-3";
+            col32.style = "text-align: left";
+            var p32 = document.createElement("p");
+            p32.innerText = "E-mail: " + email;
+            col32.appendChild(p32);
+            row3.appendChild(col33);
+            row3.appendChild(col32);
+
             colmd12.appendChild(row2);
             colmd12.appendChild(row3);
             colmd12.style = "padding-left: 30px; padding-right: 30px;";
             row.appendChild(colmd12);
             table.appendChild(row);
-            //var hr = document.createElement("hr");
-            //table.appendChild(hr);
         }
     }
     else{
         document.getElementById('textHere').style.display = 'none';
         document.getElementById('shouldBeBlocked').style.display = 'none';
         var el = document.getElementsByClassName("container-fluid")[0];
-
         var row9 = document.createElement("div");
         row9.className = "row text-center";
         var p99 = document.createElement("p");

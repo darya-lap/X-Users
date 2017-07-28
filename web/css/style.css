@@ -1,27 +1,41 @@
 .header{
     height: 60px;
     background-color: #2aabd2;
-    font-size: 40px;
     color: white;
     padding-left: 30px;
+    font-size: 40px;
 }
 
 .nameLine{
     height: 40px;
     font-size: 25px;
     color: #0f0f0f;
-    text-align: center;
+    margin-top: 10px;
 }
 
 .cursor-pointer:hover{
     cursor: pointer;
 }
+#colored{
+    background:#7aaade;
+    height:50px;
+    padding-top:15px;
+    margin-top: 15px;
+}
 
-.tableInput{
-    width: 100%;
+.hi + .hi {
+    border-top:0;
 }
-.col-md-1{
-    padding-left:1px;
-    padding-right:1px;
-    overflow-x: auto;
+
+div.hi {
+    border-top: 1px solid rgba(70, 67, 67, 0.34);
+    border-left: 1px solid rgba(70, 67, 67, 0.34);
+    border-right: 1px solid rgba(70, 67, 67, 0.34);
+    margin-top: 10px;
 }
+
+div.hi1{
+    border: 1px solid rgba(70, 67, 67, 0.34);
+    border-top-color: rgba(191, 191, 191, 0.34);
+}
+

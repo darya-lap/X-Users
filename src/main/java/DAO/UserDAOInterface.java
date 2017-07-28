@@ -12,6 +12,7 @@ interface UserDAOInterface {
         boolean update(int user_id, Users user);
         boolean updateUsersName(int user_id, String name) throws SQLException;
         boolean updateUsersLastname (int user_id, String lastname) throws SQLException;
+        boolean updateUsersEmail (int user_id, String email) throws SQLException;
         boolean updateUsersUsername (int user_id, String username) throws SQLException;
         boolean updateUsersPassword (int user_id, String password) throws SQLException;
         boolean updateUsersBirthday (int user_id, Date date) throws SQLException;

@@ -20,56 +20,58 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
     <script type="text/javascript" src="js/content.js"></script>
-    <script type="text/javascript" src="js/nameInfo.js"></script>
     <script type="text/javascript" src="js/redirect.js"></script>
+    <script type="text/javascript" src="js/buttons.js"></script>
 
 </head>
 <body>
   <div class="container-fluid">
       <div class="row header">
           <div class="col-md-3">
-              <p>X-Users</p>
+              <p style="font-size: 40px;">X-Users</p>
           </div>
           <div class="col-md-8"></div>
           <div class = "col-md-1">
-              <button class = "btn btn-primary" onclick="logout()">Log Out</button>
+              <button class = "btn btn-primary" onclick="toPage('logout')">Log Out</button>
           </div>
       </div>
-      <div class = "row nameLine">
-          <div class = "col-md-12">
-              <p id="userNameSurname">Hello, Admin Adminovich!</p>
+      <div class="row"></div>
+      <div class="row" id = "textHere" style="width: 100%;">
+          <div class="col-md-3 text-center">
+              <input id = "addNewBut" type="button" class = "btn btn-primary cursor-pointer" value="Add new User" onclick="toPage('newUser.html')" style="margin-top: 20px;">
           </div>
-      </div>
-      <div class="row">
-          <div class="col-md-offset-1 col-md-2 col-sm-offset-1 col-sm-2">
-              <input id = "addNewBut" type="button" class = "btn btn-default cursor-pointer addBtn" value="Add new User" onclick="addNewUser()">
-              <!--<button class="btn btn-default cursor-pointer addBtn" >Add new user</button>-->
-          </div>
-          <div class="col-md-3 col-sm-3">
+          <div class="col-md-3">
               <label for="meeting">Searching by birthday : </label>
-              <input id="meeting" class = "cursor-pointer" type="date" onclick=""/>
+              <form action="/searchByBirth" method="get">
+                  <input id="meeting" class = "cursor-pointer" type="date" name="searchByBirth"/>
+                  <button class="btn btn-default cursor-pointer">Search</button>
+              </form>
           </div>
-          <div class="col-md-3 col-sm-3">
+          <div class="col-md-3">
               <label for="emailSearch">Searching by e-mail : </label>
-              <input id="emailSearch" class = "cursor-pointer" onclick=""/>
+              <form action="/searchByEmail" method="get">
+                  <input id="emailSearch" class = "cursor-pointer" type="text" name = "searchByEmail"/>
+                  <button class="btn btn-default cursor-pointer">Search</button>
+              </form>
           </div>
-          <div class = "col-md-3 col-sm-3">
-              <label for="nameSearching">Search by name or e-mail: </label>
-              <input id="nameSearching" class = "cursor-pointer" onclick=""/>
+          <div class = "col-md-3">
+              <label for="nameSearching">Search by name: </label>
+              <form action="/searchByName" method="get">
+                  <input id="nameSearching" class = "cursor-pointer" name = "searchByName" type="text"/>
+                  <button class="btn btn-default cursor-pointer">Search</button>
+              </form>
           </div>
 
       </div>
-      <hr>
-      <div class="row text-center" >
+      <div class="row text-center" id = "shouldBeBlocked">
           <div class="col-md-12  text-center">
               <div class="row text-center" style="margin-top: 10px;">
                   <div class = "col-md-12" id = "usersTable">
-                      <div class = "row">
+                      <div class = "row"  id = "colored" style = "padding-left: 15px; padding-right: 15px;">
                           <div class = "col-md-1">id</div>
                           <div class = "col-md-1">Name</div>
                           <div class = "col-md-1">Surname</div>
                           <div class = "col-md-1">Birthday</div>
-                          <!--<div class = "col-md-1">E-mail</div>-->
                           <div class = "col-md-1">Username</div>
                           <div class = "col-md-1">Password</div>
                           <div class = "col-md-1">Created</div>
@@ -78,7 +80,6 @@
                           <div class = "col-md-1">Role</div>
                           <div class = "col-md-1">Actions</div>
                       </div>
-                      <hr>
                   </div>
               </div>
           </div>

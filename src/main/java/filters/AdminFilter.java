@@ -20,8 +20,12 @@ public class AdminFilter implements Filter {
         String uri = httpReq.getRequestURI();
         HttpSession session = ((HttpServletRequest) request).getSession();
 
-        String role = session.getAttribute("user_role").toString();
-        System.out.println(role);
+        Object role = session.getAttribute("user_role");
+        if (role != null){
+            System.out.println(role.toString());
+        }
+        System.out.println(ip);
+        System.out.println(uri);
 
         chain.doFilter(request, response);
     }

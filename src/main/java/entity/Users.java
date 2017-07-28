@@ -35,11 +35,9 @@ public class Users {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date result =  df.parse(birthday);
 
-        System.out.println(result);
         this.birthday = result;
         this.createdTimestamp = new Date();
         this.lastUpdatedTimeStamp = new Date();
-        System.out.println(isActive);
         if (isActive.equals("active")) {
             this.isActive = 1;
         }

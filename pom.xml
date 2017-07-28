@@ -13,6 +13,7 @@
     <groupId>com.roi.technobus</groupId>
     <artifactId>X-Users</artifactId>
     <version>1.0</version>
+    <packaging>war</packaging>
 
     <build>
         <plugins>

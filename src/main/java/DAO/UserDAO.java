@@ -40,6 +40,55 @@ public class UserDAO implements UserDAOInterface{
 
     @Override
     public boolean update(int user_id, Users user){
+      //  Session session = null;
+       // try {
+//            session = HibernateUtil.getSessionFactory().openSession();
+//            session.beginTransaction();
+//            session.update(user);
+//            session.getTransaction().commit();
+//            return true;
+        //    try {
+//                session = HibernateUtil.getSessionFactory().getCurrentSession();
+//                session.beginTransaction();
+//                String hql = "UPDATE Users SET username = :username_par, lastname= :lastname_par," +
+//                        "firstname = :firstname_par, password = :password_par," +
+//                        "email = :email_par, birthday = :birthday_par," +
+//                        "isActive = :isActive_par, role = :role_par," +
+//                        "lastUpdatedTimeStamp = :update_par " +
+//                        "WHERE id = :id_par";
+//                Query query = session.createQuery(hql);
+//                query.setParameter("username_par", user.getUsername());
+//                query.setParameter("lastname_par", user.getLastname());
+//                query.setParameter("firstname_par", user.getFirstname());
+//                query.setParameter("password_par", user.getPassword());
+//                query.setParameter("email_par", user.getEmail());
+//                query.setParameter("birthday_par", user.getBirthday());
+//                query.setParameter("isActive_par", user.getIsActive());
+//                query.setParameter("role_par", user.getRole());
+//                query.setParameter("update_par", new Date());
+//                query.setParameter("id_par", user.getId());
+//
+//
+//                List <Users> users=  (List<Users>)query.getResultList();
+//                session.getTransaction().commit();
+//                if (users.size() <= 0) return false;
+//
+//            } finally {
+//                if (session != null && session.isOpen()) {
+//                    session.close();
+//                }
+//            }
+//            return true;
+//        }
+//        catch (Exception e){
+//            System.out.println("Update error");
+//            return false;
+//        }finally {
+//            if (session != null && session.isOpen()) {
+//                session.close();
+//            }
+//        }
+//    }
         Session session = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
@@ -49,7 +98,7 @@ public class UserDAO implements UserDAOInterface{
             return true;
         }
         catch (Exception e){
-            System.out.println("Update error");
+            System.out.println("Update user error");
             return false;
         }finally {
             if (session != null && session.isOpen()) {
@@ -57,7 +106,6 @@ public class UserDAO implements UserDAOInterface{
             }
         }
     }
-
     @Override
     public boolean updateUsersName(int id, String name) throws  SQLException{
         Users user = getUsersById(id);
@@ -70,6 +118,14 @@ public class UserDAO implements UserDAOInterface{
     public boolean updateUsersLastname(int user_id, String lastname) throws SQLException {
         Users user = getUsersById(user_id);
         user.setLastname(lastname);
+        user.setLastUpdatedTimeStamp(new Date());
+        return update(user_id, user);
+    }
+
+    @Override
+    public boolean updateUsersEmail(int user_id, String email) throws SQLException {
+        Users user = getUsersById(user_id);
+        user.setEmail(email);
         user.setLastUpdatedTimeStamp(new Date());
         return update(user_id, user);
     }
@@ -254,6 +310,18 @@ public class UserDAO implements UserDAOInterface{
 
     @Override
     public Collection getUsersByName(String partOfName) throws SQLException {
-        return null;
+        List<Users> allUsers = (List<Users>)getAllUsers();
+        List<Users> searchedUsers = new ArrayList<>(10);
+        for (Users user:allUsers){
+            String name = user.getFirstname().toUpperCase();
+
+            if (name.contains(partOfName.toUpperCase())) searchedUsers.add(user);
+            else{
+                name = user.getLastname().toUpperCase();
+                if (name.contains(partOfName.toUpperCase())) searchedUsers.add(user);
+            }
+        }
+        if (searchedUsers.size() > 0) return searchedUsers;
+        else return null;
     }
 }
