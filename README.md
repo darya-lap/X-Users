@@ -17,3 +17,5 @@ There is no secure communication.
 Admin can edit user, when this user is not active.
 Admin can't delete users.
 Inactive users can use the system.
+
+ORM: Hibernate
